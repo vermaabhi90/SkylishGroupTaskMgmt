@@ -17,6 +17,8 @@ namespace TaskManagement.Controllers
             string UserId=User.Identity.GetUserId();
             EmployeeModel Model = new EmployeeModel();
             Model=bL.CheckEmpRole(UserId);
+            Session["Role"] = Model.Role;
+            ViewBag.Role = Session["Role"].ToString();
             return View(Model);
         }
 
