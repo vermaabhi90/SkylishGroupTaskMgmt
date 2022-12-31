@@ -63,3 +63,13 @@
     }
 
 </table>
+
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+        if ('@ViewBag.Role' == "Employee") {
+            $('.admin').hide();
+        }
+    });
+    </script>
+}

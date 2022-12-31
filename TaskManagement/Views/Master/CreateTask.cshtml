@@ -278,9 +278,9 @@
                 </div>
             }
 
-           
-            </form>
-</div>
+
+        </form>
+    </div>
 }
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -397,10 +397,17 @@
 
 @section Scripts {
     <script>
-    $(document).ready(function () {
-           callChangefunc()
-    });
+        $(document).ready(function () {
+            if ('@ViewBag.Role' == "Employee") {
+                $('.admin').hide();
+            }
+        });
     </script>
- 
+    <script>
+        $(document).ready(function () {
+            callChangefunc()
+        });
+    </script>
+
     @Scripts.Render("~/bundles/jqueryval")
 }

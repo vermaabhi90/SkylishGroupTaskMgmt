@@ -50,7 +50,7 @@
             <label>cc Mail</label>
             <input type="text" class="form-control" id="ccMail" name="ccMail" placeholder="cc Mail" value="@Model.ccMail" readonly>
         </div>
-      
+
         <div class="form-group">
             @Html.LabelFor(model => model.AssignedToEmpId, htmlAttributes: new { @class = "form - control" })
             <div class="col-md-10">
@@ -202,7 +202,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-5">
                 <input type="submit" value="Approve" class="btn btn-success" onclick="SetStatus('3')" />
-                &nbsp; &nbsp; &nbsp; &nbsp;               
+                &nbsp; &nbsp; &nbsp; &nbsp;
                 <input type="submit" class="btn btn-primary" value="Reject" onclick="SetStatus('4');" />
                 &nbsp; &nbsp; &nbsp; &nbsp;
                 <a class="btn btn-warning" href="@Url.Action("GetPendingApprovalTaskList","Master")">Back to List</a>
@@ -278,13 +278,20 @@
 
 
 <script>
-    function SetStatus(Status)
-    {
+    function SetStatus(Status) {
         $("#StatusId").val(Status);
     }
 </script>
 
-
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+        if ('@ViewBag.Role' == "Employee") {
+            $('.admin').hide();
+        }
+    });
+    </script>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

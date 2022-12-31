@@ -31,6 +31,7 @@ namespace TaskManagement.Controllers
             {
                
                 lstEmp = BLObj.GetEmployeeList(UserId);
+                ViewBag.Role = Session["Role"].ToString();
             }
             catch (Exception ex)
             {
@@ -46,6 +47,7 @@ namespace TaskManagement.Controllers
                 Model = BLObj.GetSelectedEmployeeDetails("", EmpId);
                 if (EmpId == 0)
                     Model.isActive = true;
+                ViewBag.Role = Session["Role"].ToString();
             }
             catch (Exception ex)
             {
@@ -57,6 +59,7 @@ namespace TaskManagement.Controllers
         [HttpPost]
         public ActionResult CreateEmployee(EmployeeModel obj)
         {
+            ViewBag.Role = Session["Role"].ToString();
             EmployeeModel Model = new EmployeeModel();
             int  EmpId = 0;
             int Errorcode = 0;
@@ -103,7 +106,8 @@ namespace TaskManagement.Controllers
             }
         }
         public ActionResult CreateNewUser(int EmpId, string Email,  string UserName)
-        {    
+        {
+            ViewBag.Role = Session["Role"].ToString();
             int Errorcode = 0;
             string Password = "Asd@123";
             if (ModelState.IsValid)
@@ -185,6 +189,7 @@ namespace TaskManagement.Controllers
         [Authorize]
         public ActionResult GetTaskList()
         {
+            ViewBag.Role = Session["Role"].ToString();
             List<TaskModel> lstTask = new List<TaskModel>();
             string UserId = User.Identity.GetUserId();
             try
@@ -200,6 +205,7 @@ namespace TaskManagement.Controllers
 
         public ActionResult CreateTask(int TaskId)
         {
+            ViewBag.Role = Session["Role"].ToString();
             TaskModel Model = new TaskModel();
             Model.CommentList = new List<AssigneeTaskLogModel>();
             try
@@ -227,6 +233,7 @@ namespace TaskManagement.Controllers
         [HttpPost]
         public ActionResult CreateTask(TaskModel obj)
         {
+            ViewBag.Role = Session["Role"].ToString();
             TaskModel Model = new TaskModel();
             int TaskId = 0;
             int Errorcode = 0;
@@ -395,6 +402,7 @@ namespace TaskManagement.Controllers
         [Authorize]
         public ActionResult GetPendingApprovalTaskList()
         {
+            ViewBag.Role = Session["Role"].ToString();
             List<TaskModel> lstTask = new List<TaskModel>();
             string UserId = User.Identity.GetUserId();
             try
@@ -410,6 +418,7 @@ namespace TaskManagement.Controllers
 
         public ActionResult CreatePendingAprovalTask(int TaskId)
         {
+            ViewBag.Role = Session["Role"].ToString();
             TaskModel Model = new TaskModel();
             try
             {
@@ -429,6 +438,7 @@ namespace TaskManagement.Controllers
         [HttpPost]
         public ActionResult CreatePendingAprovalTask(TaskModel obj)
         {
+            ViewBag.Role = Session["Role"].ToString();
             TaskModel Model = new TaskModel();
             int TaskId = 0;
             int Errorcode = 0;
@@ -454,6 +464,7 @@ namespace TaskManagement.Controllers
         [Authorize]
         public ActionResult GetAssigneeTaskList()
         {
+            ViewBag.Role = Session["Role"].ToString();
             List<TaskModel> lstTask = new List<TaskModel>();
             string UserId = User.Identity.GetUserId();
             try
@@ -469,6 +480,7 @@ namespace TaskManagement.Controllers
 
         public ActionResult CreateAssigneeTaskUpdated(int TaskId)
         {
+            ViewBag.Role = Session["Role"].ToString();
             TaskModel Model = new TaskModel();
             Model.CommentList = new List<AssigneeTaskLogModel>();
             try
@@ -496,6 +508,7 @@ namespace TaskManagement.Controllers
 
         public JsonResult SaveAssigneeComments()
         {
+            ViewBag.Role = Session["Role"].ToString();
             AssigneeTaskLogModel Model = new AssigneeTaskLogModel();
             string UserId = User.Identity.GetUserId();
             int ErrCd = 5000;
