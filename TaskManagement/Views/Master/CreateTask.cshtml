@@ -137,7 +137,7 @@
                 <section class="col col-2" id="monthlyoption">
                     <label class="label">Nth Day</label>
                     <label class="input">
-                        <input type="number" name="NthDay" id="NthDay" value="@Model.NthDay">
+                        <input type="number" name="NthDay" id="NthDay" value="@Model.NthDay" onchange="CheckValidationAsPerDay()"   >
                     </label>
                 </section> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <section class="col col-2" id="WeekD">
@@ -150,12 +150,13 @@
                  new { value = "3" , text = "Wednesday"},
                  new { value = "4" , text = "Thursday" },
                 new { value = "5" , text = "Friday"},
-                 new { value = "6" , text = "Sunday"}
+                new { value = "6" , text = "Saturday"},
+                 new { value = "7" , text = "Sunday"}
                 },
                 "value",
                 "text",
                 Model.WeekDay
-                )
+                ), new { @onchange = "CheckValidationAsPerDay()" }
                 )
                 </section>
                 <section class="col col-2" id="Month">
@@ -336,6 +337,32 @@
                 $("#Month").hide();
                 $("#monthlyoption").show();
                 $("#WeekD").show();
+                var Weeks = '@Model.WeekDays';
+
+            if (Weeks == "") {
+                Weeks = "0000000";
+            }
+            if (Weeks[0] == "1") {
+               $("#WeekDay").val(1);
+            }
+            if (Weeks[1] == "1") {
+               $("#WeekDay").val(2);
+            }
+            if (Weeks[2] == "1") {
+               $("#WeekDay").val(3);
+            }
+            if (Weeks[3] == "1") {
+                $("#WeekDay").val(4);
+            }
+            if (Weeks[4] == "1") {
+                $("#WeekDay").val(5);
+            }
+            if (Weeks[5] == "1") {
+               $("#WeekDay").val(6);
+            }
+            if (Weeks[6] == "1") {
+                $("#WeekDay").val(7);
+            }
         }
          if('@Model.FrequencyType' == "Yearly")
         {
@@ -343,12 +370,43 @@
                   $("#Month").show();
                 $("#monthlyoption").show();
                 $("#WeekD").show();
+            var Weeks = '@Model.WeekDays';
+                 if (Weeks == "") {
+                Weeks = "0000000";
+            }
+            if (Weeks[0] == "1") {
+               $("#WeekDay").val(1);
+            }
+            if (Weeks[1] == "1") {
+               $("#WeekDay").val(2);
+            }
+            if (Weeks[2] == "1") {
+               $("#WeekDay").val(3);
+            }
+            if (Weeks[3] == "1") {
+                $("#WeekDay").val(4);
+            }
+            if (Weeks[4] == "1") {
+                $("#WeekDay").val(5);
+            }
+            if (Weeks[5] == "1") {
+               $("#WeekDay").val(6);
+            }
+            if (Weeks[6] == "1") {
+                $("#WeekDay").val(7);
+            }
         }
     })
 </script>
 <script>
     function SetStatus(Status) {
         $("#StatusId").val(Status);
+           var frequency = $("#FrequencyType").val();
+             var NthDay = $("#NthDay").val();
+              if ((frequency == "Monthly"||frequency == "Monthly")&& (NthDay ==""||NthDay == 0))
+                {
+                    $("#NthDay").val(1);
+                }
     }
 
 
@@ -383,6 +441,29 @@
             $("#monthlyoption").show();
             $("#WeekD").show();
         }
+    }
+
+    function CheckValidationAsPerDay()
+    {
+        var NthDay = $("#NthDay").val();
+        var WeekDay = $("#WeekDay").val();
+
+        if(WeekDay > 0 && NthDay > 5)
+        {
+             alert("Please enter week no. between 1 to 5 in nth day field ");
+              $("#NthDay").val(0);
+        }
+        if(WeekDay == 0 && NthDay > 31)
+        {
+             alert("Please enter number between 1 to 31 in Nth day field ");
+             $("#NthDay").val(0);
+        }
+        if(WeekDay == 0 && NthDay == 0)
+        {
+             alert("Please enter number between 1 to 31 in Nth day field ");
+             $("#NthDay").val(0);
+        }
+
     }
 
 </script>

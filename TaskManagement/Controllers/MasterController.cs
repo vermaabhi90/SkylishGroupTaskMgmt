@@ -249,6 +249,7 @@ namespace TaskManagement.Controllers
                 Model.isActive = obj.isActive;
                 Model.AssignedToEmpId = obj.AssignedToEmpId;
                 Model.FrequencyType = obj.FrequencyType;
+                Model.WeekDay = obj.WeekDay;
                 switch (Model.FrequencyType)
                 {
                     case "Daily":
